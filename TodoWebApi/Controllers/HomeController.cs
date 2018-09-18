@@ -10,7 +10,8 @@ namespace TodoWebApi.Controllers
     {
         public ActionResult Index()
         {
-            ViewBag.Title = "Home Page";
+            //Data.Class1 c= new Data.Class1();
+            //c.MakeAdmin();
 
             return View();
         }
