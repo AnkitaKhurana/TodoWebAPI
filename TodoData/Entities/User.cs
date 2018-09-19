@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Data.Entities
+namespace TodoData.Entities
 {
     public class User
     {
