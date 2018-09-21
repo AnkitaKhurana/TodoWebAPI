@@ -17,18 +17,20 @@ namespace DataAccess.UserData
         {
             try
             {
-                if (db.Users.Find(user.Id) != null)
+                if (db.Users.Where(x => x.UserName == user.UserName).FirstOrDefault()!= null)
                 {
                     throw new UserAlreadyExists();
                 }
-                User userDB = Map.UserMapper.ToDB(user);   
+                User userDB = Map.UserMapper.ToDB(user);
+                userDB.Id = Guid.NewGuid();
                 db.Users.Add(userDB);
+                db.SaveChanges();
                 return true;                
             }
             catch(UserAlreadyExists){
                 throw new UserAlreadyExists();
             }
-            catch
+            catch 
             {
                 return false;
             }
