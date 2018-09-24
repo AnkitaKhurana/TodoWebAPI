@@ -21,6 +21,7 @@ namespace TodoWebApi.Providers
             context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { "*" });
 
 
+
             //using (AuthRepository _repo = new AuthRepository())
             //{
             //IdentityUser user = await _repo.FindUser(context.UserName, context.Password);
@@ -33,12 +34,14 @@ namespace TodoWebApi.Providers
             //}
 
 
-
             //my test code
-            if (context.UserName == "admin" && context.Password=="admin")
+
+            BusinessLogic.Logic.UserLogic userLogic = new BusinessLogic.Logic.UserLogic();
+            if(userLogic.Find(context.UserName,context.Password)!=null)
             {
                 var identity = new ClaimsIdentity(context.Options.AuthenticationType);
-                identity.AddClaim(new Claim("sub", context.UserName));
+
+                identity.AddClaim(new Claim(ClaimTypes.Name, context.UserName));
                // identity.AddClaim(new Claim("role", "user"));
                 context.Validated(identity);
             }

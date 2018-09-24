@@ -13,19 +13,16 @@ using TodoWebApi.Models;
 
 namespace TodoWebApi.Controllers
 {
-   // [RoutePrefix("api/user")]
     public class UserController : ApiController
     {
 
         private BusinessLogic.Logic.UserLogic userLogic = new BusinessLogic.Logic.UserLogic();
 
-        //[Route("register")]
         [HttpPost]
         public HttpResponseMessage Register(User user)
         {
             try
             {
-
                 UserDTO userDTO = UserMapper.ToDTO(user);
                 var userSaved = userLogic.Register(userDTO);
                 HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.Created, user);

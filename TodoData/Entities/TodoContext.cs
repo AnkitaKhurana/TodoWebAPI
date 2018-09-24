@@ -11,8 +11,8 @@ namespace TodoData.Entities
         public TodoContext() : base("TodoContext")
         {
         }
-        public DbSet<User> Users { get; set; }
-        public DbSet<Todo> Todos { get; set; }
+        public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Todo> Todos { get; set; }
 
     }
 }

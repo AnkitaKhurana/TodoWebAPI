@@ -8,12 +8,12 @@ namespace TodoData.Entities
     {
         public User()
         {
-            this.Todos = new List<Todo>();
+            this.Todo = new List<Todo>();
         }
         public Guid Id { get; set; }
         public string UserName { get; set; } 
         public string Password { get; set; } 
 
-        public virtual ICollection<Todo> Todos { get; set; }
+        public virtual ICollection<Todo> Todo { get; set; }
     }
 }

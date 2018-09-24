@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace TodoData.Entities
@@ -12,8 +13,9 @@ namespace TodoData.Entities
         public DateTime DateUpdated { get; set; } 
         public int Status { get; set; }
         public DateTime? FinishDate { get; set; }
-        public Guid UserId { get; set; }
 
+        [ForeignKey("User")]
+        public Guid UserId { get; set; }       
         public virtual User User { get; set; }
 
     }

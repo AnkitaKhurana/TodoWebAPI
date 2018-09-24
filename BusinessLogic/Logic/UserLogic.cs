@@ -25,6 +25,24 @@ namespace BusinessLogic.Logic
                 return false;
             }
         }
+        
+        public UserDTO Find(string UserName , string Password)
+        {
+            try
+            {
+                UserDTO userDTO = new UserDTO()
+                {
+                    UserName = UserName,
+                    Password = Password
+                };
+                return Login(userDTO);
+
+            }
+            catch
+            {
+                return null;
+            }
+        }
 
         public UserDTO Login(UserDTO user)
         {
