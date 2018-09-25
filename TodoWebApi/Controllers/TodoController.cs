@@ -35,6 +35,26 @@ namespace TodoWebApi.Controllers
                 return response;
             }
         }
+        [Authorize]
+        [HttpPost]
+        public HttpResponseMessage Edit(Todo todo)
+        {
+            try
+            {
+                var todoSaved = todoLogic.EditNewTodo(todo.Id, User.Identity.Name, todo.Message);
+                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.Created, todoSaved);
+                if (todoSaved == false)
+                {
+                    response.StatusCode = HttpStatusCode.OK;
+                }
+                return response;
+            }
+            catch (Exception e)
+            {
+                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.BadRequest, e.Message);
+                return response;
+            }
+        }
     }
 
 }

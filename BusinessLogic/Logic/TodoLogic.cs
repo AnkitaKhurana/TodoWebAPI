@@ -25,5 +25,19 @@ namespace BusinessLogic.Logic
                 return false;
             }
         }
+        public bool EditNewTodo(Guid todoid, string userId, string message)
+        {
+            try
+            {
+                if (todoData.EditTodo(todoid, userId, message))
+                    return true;
+
+                return false;
+            }
+            catch
+            {
+                return false;
+            }
+        }
     }
 }

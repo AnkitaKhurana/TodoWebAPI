@@ -17,19 +17,38 @@ namespace DataAccess.Data
             try
             {
                 var userfound = db.Users.Where(x => x.UserName == user).FirstOrDefault();
-
-                Todo todoDB = TodoMapper.ToDB(todo);
-                todoDB.Id = Guid.NewGuid();
-                todoDB.DateGenerated = DateTime.Now;
-                todoDB.DateUpdated = todoDB.DateGenerated;
-                todoDB.Status = 1;
-               // todoDB.User = userfound;
-                todoDB.UserId = userfound.Id;
-                db.Todos.Add(todoDB);
-                db.SaveChanges();
+                if(userfound!=null)
+                {
+                    Todo todoDB = TodoMapper.ToDB(todo);
+                    todoDB.Id = Guid.NewGuid();
+                    todoDB.DateGenerated = DateTime.Now;
+                    todoDB.DateUpdated = todoDB.DateGenerated;
+                    todoDB.Status = 1;
+                    todoDB.UserId = userfound.Id;
+                    db.Todos.Add(todoDB);
+                    db.SaveChanges();
+                }                
                 return true;
             }          
-            catch (Exception e)
+            catch
+            {
+                return false;
+            }
+        }
+        public bool EditTodo(Guid todoId, string user, string message)
+        {
+            try
+            {
+                var userfound = db.Users.Where(x => x.UserName == user).FirstOrDefault();
+                if (userfound != null)
+                {
+                    var todoFound = db.Todos.Where(x => x.Id == todoId).FirstOrDefault();
+                    todoFound.Message = message;                    
+                    db.SaveChanges();
+                }
+                return true;
+            }
+            catch
             {
                 return false;
             }
