@@ -58,6 +58,21 @@ namespace DataAccess.UserData
             }
         }
 
+        public UserDTO FindUser ( string Username)
+        {
+            try
+            {
+                User user = db.Users.Where(x => x.UserName == Username).FirstOrDefault();
+                UserDTO userDTO = Map.UserMapper.ToDTO(user);
+                return userDTO;
+            }
+            catch
+            {
+                return null;
+            }
+
+        }
+
         public UserDTO FindUserByCredential(string Username, string Password)
         {
             try
